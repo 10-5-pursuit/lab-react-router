@@ -1,0 +1,11 @@
+form {
+    display: flex;
+}
+
+input {
+    height: fit-content;
+}
+
+button{
+    height: fit-content;
+}
