@@ -21,4 +21,5 @@
 .pets-wrapper nav ul li a:hover {
   background: var(--white);
   color: var(--black);
+  cursor: pointer;
 }

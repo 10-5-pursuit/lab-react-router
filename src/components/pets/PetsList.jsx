@@ -1,9 +1,10 @@
 import React from "react";
 import PetsListNav from "./PetsListNav";
-import Pet from "./Pet";
 import "./PetsList.css";
+import HandleDisplay from "../Utils/Display"
 
-export const PetsList = ({ pets }) => {
+export const PetsList = ({ pets, animals, setAnimals }) => {
+
   const [cats, dogs] = pets.reduce(
     (acc, pet) => {
       const position = pet.kind === "Cat" ? 0 : 1;
@@ -15,17 +16,9 @@ export const PetsList = ({ pets }) => {
 
   return (
     <section className="pets-wrapper">
-      <PetsListNav cats={cats} dogs={dogs} />
+      <PetsListNav cats={cats} dogs={dogs} setAnimals={setAnimals}/>
       <section className="pets-list">
-        {/* All cats section */}
-        {cats.map((cat) => (
-          <Pet key={cat.id} kind="cat" pet={cat} />
-        ))}
-
-        {/* All dogs section */}
-        {dogs.map((dog) => (
-          <Pet key={dog.id} kind="dog" pet={dog} />
-        ))}
+        <HandleDisplay animals={animals} cats={cats} dogs={dogs} pets={pets}/>
       </section>
     </section>
   );

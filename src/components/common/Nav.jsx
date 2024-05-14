@@ -1,12 +1,17 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import "./Nav.css";
 
 function Nav() {
+
+  const navigate = useNavigate();
+
+
   return (
     <header>
       <article>
         <h1>
-          <a href="/">
+          <a onClick={() => navigate("/")}>
             Northwest <span>Animal Hospital</span>
           </a>
         </h1>
@@ -14,12 +19,16 @@ function Nav() {
       <aside>
         <ul>
           <li>
-            <a href="/staff">All Staff</a>
+            <a onClick={() => navigate("/staff")}>All Staff</a>
           </li>
           <li>
-            <a href="/pets">All Pets</a>
+            <a onClick={() => navigate("/pets/All")}>All Pets</a>
+          </li>
+          <li>
+          <a onClick={() => navigate("/pets/newpet")}>New Pet</a>
           </li>
         </ul>
+        
       </aside>
     </header>
   );
