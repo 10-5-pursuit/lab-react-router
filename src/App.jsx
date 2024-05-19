@@ -1,23 +1,22 @@
+
 import React from "react";
 import { useState } from "react";
 
-/*
-  Components
-*/
-import Nav from "./components/common/Nav";
+// Import components
+import Nav from "./components/common/Nav.jsx";
 import Footer from "./components/common/Footer";
 import Home from "./components/home/Home";
 import StaffList from "./components/staff/StaffList";
 import PetsList from "./components/pets/PetsList";
 
-/*
-  Data
-  ---------------
-  Note: Normally this data would be pulled from an API. It is not necessary, however, for this application.
-*/
+// Import data
 import { employeeData } from "./data/employees.js";
 import { ownerData } from "./data/owners";
 import { petData } from "./data/pets";
+
+import { Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [employees] = useState(employeeData);
@@ -25,13 +24,24 @@ function App() {
   const [pets] = useState(petData);
 
   return (
-    <div className="wrapper">
-      <Nav />
-      <Home employees={employees} owners={owners} pets={pets} />
-      <StaffList employees={employees} />
-      <PetsList pets={pets} />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="wrapper">
+        <Nav />
+        <Routes>
+          <Route
+            path="/"
+            element={<Home employees={employees} owners={owners} pets={pets} />}
+          />
+          <Route path="/staff" element={<StaffList employees={employees} />} />
+          <Route path="/pets" element={<PetsList pets={pets} />} />
+          <Route path="/pets/cats" element={<PetsList pets={pets.filter((pet) => pet.kind === "Cat")} />} />
+          <Route path="/pets/dogs" element={<PetsList pets={pets.filter((pet) => pet.kind === "Dog")} />
+            }/>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
